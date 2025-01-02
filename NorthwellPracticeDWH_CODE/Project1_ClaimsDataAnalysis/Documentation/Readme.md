@@ -1,6 +1,3 @@
-### **README.md**
-
-```markdown
 # Project 1: Claims Data Analysis
 
 ## Overview
