@@ -131,6 +131,6 @@ Contributions are welcome! Please submit a pull request with details on changes 
 ---
 
 ## **Contact**
-For questions or feedback, reach out to [Your Email/Contact Information].
+For questions or feedback, reach out to dandredesir@gmail.com.
 
 ---
