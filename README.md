@@ -1,16 +1,18 @@
+---
+
 # NorthwellPracticeDWH Project
 
 ## **Project Overview**
-The **NorthwellPracticeDWH** (Data Warehouse) project is a centralized repository designed to support analytics, reporting, and visualization for Data Analyst and Business Intelligence Analyst roles. This data warehouse consolidates data from multiple sources, enabling efficient querying, insightful analysis, and robust visualizations through tools like Power BI and Excel.
+The **NorthwellPracticeDWH** (Data Warehouse) project serves as a centralized repository designed to support analytics, reporting, and visualization for Data Analyst and Business Intelligence Analyst roles. It consolidates data from multiple sources to enable efficient querying, insightful analysis, and robust visualizations using tools like Power BI and Excel.
 
 ---
 
 ## **Purpose**
 This project defines and implements the requirements for a star schema-based Data Warehouse to:
-- Serve as a structured and historical data repository.
-- Support ETL workflows for automated data ingestion and transformation.
-- Provide aggregated and transformed data through SQL views, stored procedures, and dimensional modeling.
-- Facilitate advanced visualizations with Power BI and Excel.
+- Act as a structured and historical data repository.
+- Facilitate ETL workflows for automated data ingestion and transformation.
+- Provide aggregated and transformed data via SQL views, stored procedures, and dimensional modeling.
+- Enable advanced visualizations with Power BI and Excel.
 
 ---
 
@@ -21,21 +23,30 @@ This project defines and implements the requirements for a star schema-based Dat
    - Historical data storage for trend analysis and forecasting.
 
 2. **ETL Workflows:**
-   - **SSIS** for automated ingestion from CSVs, Excel, and APIs into staging tables.
-   - Deduplication, cleaning, and typecasting during transformation.
-   - **Python (Pandas/SQLAlchemy):** For advanced data transformations and validations.
-   - **SQL Server:** Aggregations and normalization to fit the star schema.
+   - **SSIS**: Automates ingestion from CSVs, Excel files, APIs, and other sources into staging tables.
+   - Data deduplication, cleaning, and typecasting during transformation.
+   - **Python (Pandas/SQLAlchemy)**: Handles advanced data transformations and validations.
+   - **SQL Server**: Supports aggregations and normalization for the star schema.
 
 3. **Reporting and Visualization:**
-   - **Power BI Dashboards:** Real-time insights, KPIs, slicers, and filters.
-   - **Excel Reports:** Ad hoc reporting and trend analysis with pivot tables.
+   - **Power BI Dashboards**: Real-time insights, KPIs, slicers, and filters.
+   - **Excel Reports**: Ad hoc reporting and trend analysis with pivot tables.
+
+---
+
+## **SSIS Directory**
+The SSIS packages for ETL workflows are maintained in a separate repository located in the `NorthwellPracticeDWH_SSIS` directory. This directory includes:
+- **Project-Specific Packages**: Contains individual SSIS packages for each project (e.g., Claims Data Analysis, Sales Data Analysis).
+- **Shared Resources**: Includes shared logging frameworks, reusable connection configurations, and email notification packages.
+
+Refer to the SSIS README in the `NorthwellPracticeDWH_SSIS` folder for further details.
 
 ---
 
 ## **Planned Use Cases**
 
 ### **Project 1: Claims Data Analysis Dashboard**
-- **Workflow:**
+- **Workflow**:
   1. Load claims data into staging tables using SSIS.
   2. Transform data into fact and dimension tables (FactClaims, DimPayers, DimClaimStatus).
   3. Create SQL views for monthly trends and denial rates.
@@ -43,41 +54,11 @@ This project defines and implements the requirements for a star schema-based Dat
   5. Export summaries to Excel for manual analysis.
 
 ### **Project 2: Business Intelligence KPI Dashboard**
-- **Workflow:**
+- **Workflow**:
   1. Use SSIS to ingest sales data.
   2. Transform into FactSales and dimension tables (DimProducts, DimRegions).
   3. Develop SQL views for KPIs (revenue, productivity).
   4. Build Power BI dashboards for performance metrics.
-
-### **Project 3: Pre-Claim Edits Workflow Optimization**
-- **Workflow:**
-  1. Ingest pre-claim edit data via SSIS.
-  2. Analyze edit types and resolution times using SQL views.
-  3. Create Power BI Gantt charts for workflow visualization.
-
-### **Project 4: Hospital Revenue Analysis**
-- **Workflow:**
-  1. Ingest revenue data into staging tables via SSIS.
-  2. Load cleaned data into FactMonthlyRevenue and DimDepartments.
-  3. Visualize departmental trends using Power BI.
-
-### **Project 5: SQL Server Performance Tuning**
-- **Workflow:**
-  1. Ingest large datasets into FactSales.
-  2. Optimize queries using execution plans.
-  3. Perform analysis using Python for outlier detection.
-
-### **Project 6: Employee Productivity and Cost Analysis**
-- **Workflow:**
-  1. Use SSIS to ingest task and cost data.
-  2. Analyze productivity trends using DimEmployees and DimDepartments.
-  3. Build Power BI visuals for cost-efficiency trends.
-
-### **Project 7: Claims Denial Trends Reporting**
-- **Workflow:**
-  1. Ingest denial data via SSIS.
-  2. Analyze denial patterns using FactClaims and DimClaimStatus.
-  3. Create payer-specific KPIs in Power BI.
 
 ---
 
@@ -129,7 +110,7 @@ This project defines and implements the requirements for a star schema-based Dat
 ## **How to Run**
 1. Clone or download the repository containing the SQL scripts and workflows.
 2. Execute scripts in sequence:
-   - Start with `CreateDatabase.sql`.
+   - Start with `CreateDatabase.sql` (in `Shared/CommonScripts/`).
    - Run table creation scripts in `CreateTables/`.
    - Load data using `PopulateData/` scripts.
 3. Test queries and workflows in SSMS.
@@ -152,3 +133,4 @@ Contributions are welcome! Please submit a pull request with details on changes 
 ## **Contact**
 For questions or feedback, reach out to [Your Email/Contact Information].
 
+---
