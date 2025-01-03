@@ -1,3 +1,5 @@
+---
+
 # Project 1: Claims Data Analysis
 
 ## Overview
@@ -14,11 +16,6 @@ Project1_ClaimsDataAnalysis/
 │   ├── DimensionTables.sql       # SQL scripts to create dimension tables
 ├── PopulateData/
 │   ├── LoadClaims.sql            # SQL script to load initial claims data
-│   ├── SSIS/                     # SSIS packages for automated data ingestion
-│   │   ├── LoadClaims.dtsx       # SSIS package for claims data ingestion
-│   ├── SampleCSV/                # Sample CSV files for testing
-│       ├── Claims.csv
-│       ├── ClaimStatus.csv
 ├── Transformation/
 │   ├── TransformToFactAndDim.sql # SQL script for data transformation
 │   ├── Views.sql                 # SQL scripts for creating views
@@ -31,6 +28,20 @@ Project1_ClaimsDataAnalysis/
 ├── Documentation/
 │   ├── Readme.md                 # This file
 │   ├── WorkflowDiagram.png       # ETL workflow diagram
+```
+
+The SSIS packages for automating ETL processes are located in the `NorthwellPracticeDWH_SSIS` project directory:
+
+```
+NorthwellPracticeDWH_SSIS/
+├── Project1_ClaimsDataAnalysis/
+│   ├── Packages/
+│       ├── LoadClaims.dtsx       # SSIS package for claims data ingestion
+│       ├── TransformClaims.dtsx  # SSIS package for transformations
+│       ├── LoadToFactDim.dtsx    # Final loading into fact/dim tables
+│   ├── Connections/
+│       ├── ClaimsDatabase.dtsConfig  # Connection config for staging/fact tables
+│       ├── ClaimsFlatFile.dtsConfig  # Connection config for flat files
 ```
 
 ## Project Workflow
@@ -46,7 +57,7 @@ The project is divided into the following phases:
 ### 2. **Data Loading**
 - Use the scripts in `PopulateData/` to load raw data into staging tables:
   - **Initial Load**: Execute `LoadClaims.sql` to insert sample claims data into staging tables.
-  - **Automated Load**: Use the SSIS package `LoadClaims.dtsx` to automate data ingestion from CSV files in `SampleCSV/`.
+  - **Automated Load**: Use the SSIS package `LoadClaims.dtsx` (located in `NorthwellPracticeDWH_SSIS/Project1_ClaimsDataAnalysis/Packages/`) to automate data ingestion from CSV files.
 
 ### 3. **Data Transformation**
 - Transform data from staging tables to fact and dimension tables:
@@ -104,17 +115,5 @@ The project is divided into the following phases:
 - Automate data ingestion with incremental loads via SSIS.
 - Add advanced analytics in Python for more complex KPI calculations.
 - Incorporate additional datasets for extended reporting capabilities.
-```
 
 ---
-
-### **Key Features of the README**
-1. **Comprehensive Workflow**:
-   - Provides step-by-step instructions for database setup, data loading, transformation, and visualization.
-2. **Structured Overview**:
-   - Explains the purpose of each folder and file in the project.
-3. **Clear Execution Steps**:
-   - Guides users through setting up the database and running scripts/packages.
-4. **Extensible for Future Enhancements**:
-   - Highlights potential future improvements to the project.
-
