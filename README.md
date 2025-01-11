@@ -1,5 +1,3 @@
----
-
 # **NorthwellPracticeDWH Project**
 
 ## **Project Overview**
@@ -13,6 +11,7 @@ This project defines and implements the requirements for a star schema-based Dat
 - Facilitate ETL workflows for automated data ingestion and transformation.
 - Provide aggregated and transformed data via SQL views, stored procedures, and dimensional modeling.
 - Enable advanced visualizations with Power BI and Excel.
+- Periodically integrate clean data from the real-time system for comprehensive reporting and analytics.
 
 ---
 
@@ -28,12 +27,17 @@ This project defines and implements the requirements for a star schema-based Dat
    - **Python (Pandas/SQLAlchemy)**: Handles advanced data transformations and validations.
    - **SQL Server**: Supports aggregations and normalization for the star schema.
 
-3. **Logging Integration**:
+3. **Integration with Real-Time System:**
+   - Periodic ETL jobs to extract non-fraudulent data from the real-time system’s **Delta Lake**.
+   - Archive and store clean data in the DWH for long-term historical analysis.
+   - Retain fraudulent claims in Delta Lake for audit and machine learning retraining.
+
+4. **Logging Integration:**
    - Centralized **ETL_Log Table** in SQL Server for tracking ETL processes and their statuses.
    - **Python Logs** for detailed transformations, database connections, and error handling.
    - **SSIS Execution Logs** for high-level package monitoring and performance tracking.
 
-4. **Reporting and Visualization:**
+5. **Reporting and Visualization:**
    - **Power BI Dashboards**: Real-time insights, KPIs, slicers, and filters.
    - **Excel Reports**: Ad hoc reporting and trend analysis with pivot tables.
 
@@ -100,6 +104,13 @@ Refer to the SSIS README in the `NorthwellPracticeDWH_SSIS` folder for further d
   3. Develop SQL views for KPIs (revenue, productivity).
   4. Build Power BI dashboards for performance metrics.
 
+### **Project 3: Integration with Real-Time System**
+- **Workflow**:
+  1. Extract non-fraudulent data from Delta Lake in the real-time system.
+  2. Archive clean data in SQL Server using ETL workflows.
+  3. Retain only relevant historical data in Delta Lake for optimized performance.
+  4. Visualize unified reports combining real-time and batch data in Power BI.
+
 ---
 
 ## **Implementation Plan**
@@ -163,7 +174,7 @@ Refer to the SSIS README in the `NorthwellPracticeDWH_SSIS` folder for further d
 - Add Slowly Changing Dimensions (SCD) for historical tracking.
 - Implement pre-aggregated tables for frequently used metrics.
 - Migrate workflows to Azure for scalability.
-- Incorporate real-time monitoring with Kafka and streaming logs.
+- Integrate incremental real-time data updates from Delta Lake for up-to-date reporting.
 
 ---
 
@@ -173,6 +184,7 @@ Contributions are welcome! Please submit a pull request with details on changes 
 ---
 
 ## **Contact**
-For questions or feedback, reach out to [Your Email/Contact Information].
+For questions or feedback, reach out to [dandredesir@gmail.com].
 
---- 
+---
+

@@ -1,5 +1,3 @@
----
-
 # **Project 1: Claims Data Analysis**
 
 ## **Overview**
@@ -113,7 +111,13 @@ The project is divided into the following phases:
   - Use stored procedures in `StoredProcedures.sql` for reusable transformations.
   - Log transformations in `ETL_Log` for monitoring and debugging.
 
-### **4. Reporting and Visualization**
+### **4. Integration with Real-Time System**
+- Extract clean, non-fraudulent claims data from the real-time system’s **Delta Lake**.
+- Archive processed data into the DWH for long-term storage and historical reporting.
+- Retain fraudulent claims in Delta Lake for auditing and future machine learning model retraining.
+- Log data extraction and integration events in `ETL_Log`.
+
+### **5. Reporting and Visualization**
 - Create views for simplified querying using `Views.sql`.
 - Use Power BI to connect to the data warehouse and build dashboards:
   - Open `Visualizations/PowerBI.pbix` to view trends and KPIs (e.g., denial rates, processing time).
@@ -125,6 +129,7 @@ The project is divided into the following phases:
   - Denial rates by payer and status.
   - Average processing time by claim status.
   - Monthly trends in claims submissions and approvals.
+  - Unified insights combining real-time and historical data.
 
 ---
 
@@ -141,7 +146,11 @@ The project is divided into the following phases:
    - Execute the transformation script in `Transformation/TransformToFactAndDim.sql`.
    - Verify Python logs for successful transformation.
 
-4. **Step 4: Analyze and Visualize**
+4. **Step 4: Extract Real-Time Data**
+   - Periodically extract non-fraudulent data from Delta Lake in the real-time system.
+   - Archive the extracted data in the DWH for long-term storage.
+
+5. **Step 5: Analyze and Visualize**
    - Build Power BI dashboards using `Visualizations/PowerBI.pbix`.
 
 ---
@@ -151,6 +160,7 @@ The project is divided into the following phases:
 - **Data Sources**:
   - `Claims.csv`: Sample claims data.
   - `ClaimStatus.csv`: Sample claim status data.
+  - Real-time system integration with Delta Lake for clean claims data.
 
 ---
 
@@ -158,5 +168,7 @@ The project is divided into the following phases:
 - Automate incremental data ingestion via SSIS.
 - Add advanced analytics in Python for KPI forecasting.
 - Enhance logging by integrating with a centralized monitoring solution like Azure Monitor.
+- Improve real-time system integration for seamless data extraction and reporting.
 
---- 
+---
+
