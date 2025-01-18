@@ -1,190 +1,127 @@
-# **NorthwellPracticeDWH Project**
+---
 
-## **Project Overview**
-The **NorthwellPracticeDWH** (Data Warehouse) project serves as a centralized repository designed to support analytics, reporting, and visualization for Data Analysts and Business Intelligence roles. It consolidates data from multiple sources to enable efficient querying, insightful analysis, and robust visualizations using tools like Power BI and Excel.
+# **Project 1: Claims Data Analysis**
+
+## **Overview**
+The **Claims Data Analysis** project is part of the NorthwellPracticeDWH initiative. This project aims to process and analyze healthcare claims data to generate insights such as trends, processing times, and denial rates. It involves creating a star schema-based data warehouse, loading raw data, transforming it, and building visualizations using Power BI. Additionally, this project is designed to integrate seamlessly with real-time systems in future iterations.
 
 ---
 
-## **Purpose**
-This project defines and implements the requirements for a star schema-based Data Warehouse to:
-- Act as a structured and historical data repository.
-- Facilitate ETL workflows for automated data ingestion and transformation.
-- Provide aggregated and transformed data via SQL views, stored procedures, and dimensional modeling.
-- Enable advanced visualizations with Power BI and Excel.
-- Periodically integrate clean data from the real-time system for comprehensive reporting and analytics.
+## **Updated Project Structure**
+```
+Project1_ClaimsDataAnalysis/
+├── AdvancedTransformations/
+│   ├── Connection.py                 # Python database connection configuration
+│   ├── pandas_transformations.py     # Python script for advanced data transformations
+├── CreateTables/
+│   ├── DimensionTables.sql           # SQL scripts to create dimension tables
+│   ├── FactTables.sql                # SQL scripts to create fact tables
+│   ├── LoggingTables.sql             # SQL script to create logging tables
+│   ├── StagingTables.sql             # SQL scripts to create staging tables
+├── Documentation/
+│   ├── Readme.md                     # This file
+│   ├── WorkflowDiagram.png           # ETL workflow diagram
+│   ├── LoggingStrategy.md            # Details on the logging implementation
+├── Logs/
+│   ├── Python/
+│   │   ├── pandas_transformations.log # Logs Python transformation processes
+│   │   ├── database_connection.log    # Logs database connection details
+│   ├── SSIS/
+│       ├── ClaimsETLLog.log          # Logs high-level SSIS package execution details
+├── PopulateData/
+│   ├── SampleCSV/
+│   │   ├── Claims.csv                # Sample claims data
+│   │   ├── ClaimStatus.csv           # Sample claim status data
+│   ├── LoadClaims.sql                # SQL script to load initial claims data
+├── Transformation/
+│   ├── TransformToFactAndDim.sql     # SQL script for data transformation
+│   ├── StoredProcedures.sql          # SQL stored procedures for reusable transformations
+│   ├── Views.sql                     # SQL scripts for creating views
+├── Visualizations/
+│   ├── PowerBI.pbix                  # Power BI dashboards for insights
+```
 
 ---
 
-## **Key Features**
-1. **Star Schema Design:**
-   - Fact Tables for measurable metrics (e.g., Claims, Sales, Revenue).
-   - Dimension Tables for contextual data (e.g., Payers, Employees, Products).
-   - Historical data storage for trend analysis and forecasting.
-
-2. **ETL Workflows:**
-   - **SSIS**: Automates ingestion from CSVs, Excel files, APIs, and other sources into staging tables.
-   - Data deduplication, cleaning, and typecasting during transformation.
-   - **Python (Pandas/SQLAlchemy)**: Handles advanced data transformations and validations.
-   - **SQL Server**: Supports aggregations and normalization for the star schema.
-
-3. **Integration with Real-Time System:**
-   - Periodic ETL jobs to extract non-fraudulent data from the real-time system’s **Delta Lake**.
-   - Archive and store clean data in the DWH for long-term historical analysis.
-   - Retain fraudulent claims in Delta Lake for audit and machine learning retraining.
-
-4. **Logging Integration:**
-   - Centralized **ETL_Log Table** in SQL Server for tracking ETL processes and their statuses.
-   - **Python Logs** for detailed transformations, database connections, and error handling.
-   - **SSIS Execution Logs** for high-level package monitoring and performance tracking.
-
-5. **Reporting and Visualization:**
-   - **Power BI Dashboards**: Real-time insights, KPIs, slicers, and filters.
-   - **Excel Reports**: Ad hoc reporting and trend analysis with pivot tables.
+## **Integration with Real-Time Systems**
+Although this project focuses on batch processing claims data, it is designed to integrate with a real-time system for advanced data ingestion and analysis. Key points of integration include:
+- **Non-Fraudulent Claims Data**: Extract clean, non-fraudulent claims from the real-time system's **Delta Lake**.
+- **Archival Storage**: Periodically archive processed data into the data warehouse for long-term storage and historical reporting.
+- **Fraudulent Claims**: Retain flagged claims in Delta Lake for auditing and retraining machine learning models.
+- **Shared Strategy**: While integration with the real-time system will primarily occur in a separate project directory, this project establishes the foundation for future seamless integration.
 
 ---
 
 ## **Logging Strategy**
 
-### **SQL Server: ETL_Log Table**
-A centralized log table tracks all ETL processes executed within the data warehouse:
-- **What it Logs**:
-  - `ProcessName`: Name of the ETL task (e.g., LoadClaims, TransformToFact).
-  - `Status`: Indicates success, failure, or in-progress.
-  - `RecordsProcessed`: Number of rows affected during the ETL process.
-  - `ErrorMessage`: Detailed error messages for failed processes.
-- **Why It's Important**:
-  - Centralized tracking for all ETL workflows.
-  - Facilitates debugging and performance analysis.
-  - Enables the creation of monitoring dashboards in Power BI.
+### **SQL Logging: ETL_Log and ETL_FileTracking**
+- **ETL_Log Table**:
+  - Logs high-level ETL processes (e.g., loading, transforming, and extracting data).
+  - Captures process name, status, row counts, and error details for debugging.
+- **ETL_FileTracking Table**:
+  - Tracks the ingestion of source files into staging tables.
+  - Captures metadata such as file names, row counts, and timestamps for audit purposes.
 
 ### **Python Logging**
-Python-based logging tracks the execution of transformations and database connections:
-- **What it Logs**:
-  - `pandas_transformations.log`: Logs transformations (e.g., merging, filtering, and saving CSVs).
-  - `database_connection.log`: Logs database connection successes and failures.
-- **Why It's Important**:
-  - Fine-grained debugging for Python transformations.
-  - Ensures database connections are reliable and secure.
+- Logs detailed execution of Python-based transformations and database interactions.
+- **Key Log Files**:
+  - `pandas_transformations.log`: Logs row counts, merging, filtering, and transformation steps.
+  - `database_connection.log`: Tracks successes and failures in database connections.
 
 ### **SSIS Logging**
-SSIS package execution logs capture high-level metadata:
-- **What it Logs**:
-  - Execution times and durations.
-  - Number of rows processed in Data Flow tasks.
-  - Errors during package execution.
-- **Why It's Important**:
-  - Tracks the performance of SSIS workflows.
-  - Identifies errors in package control or data flow tasks.
+- Logs high-level execution of SSIS packages and Data Flow tasks.
+- **Key Log File**:
+  - `ClaimsETLLog.log`: Tracks package success or failure, row counts, and error messages.
 
 ---
 
-## **SSIS Directory**
-The SSIS packages for ETL workflows are maintained in the `NorthwellPracticeDWH_SSIS` directory. It includes:
-- **Project-Specific Packages**: Contains individual SSIS packages for each project (e.g., Claims Data Analysis, Sales Data Analysis).
-- **Shared Resources**: Includes shared logging frameworks, reusable connection configurations, and email notification packages.
+## **ETL Workflow**
 
-Refer to the SSIS README in the `NorthwellPracticeDWH_SSIS` folder for further details.
+### **1. Data Preparation**
+- **Staging Tables**: Load raw claims data into `Stg_Claims`, `Stg_Payers`, `Stg_ClaimStatus`, and `Stg_Patients`.
+- **Logging**: 
+  - Use the `ETL_FileTracking` table to log file ingestion details.
 
----
+### **2. Data Transformation**
+- **Transform to Star Schema**: Process data from staging tables into `FactClaims`, `DimPayers`, and `DimClaimStatus`.
+- **Logging**:
+  - Use the `ETL_Log` table to track transformation success, row counts, and any errors.
 
-## **Planned Use Cases**
+### **3. Reporting and Visualization**
+- **SQL Views**: Simplify querying with pre-defined views in `Views.sql`.
+- **Power BI Dashboards**: Visualize KPIs such as denial rates and processing trends using `PowerBI.pbix`.
 
-### **Project 1: Claims Data Analysis Dashboard**
-- **Workflow**:
-  1. Load claims data into staging tables using SSIS.
-  2. Transform data into fact and dimension tables (FactClaims, DimPayers, DimClaimStatus).
-  3. Log each process in `ETL_Log`.
-  4. Build Power BI visuals for trend analysis.
-  5. Export summaries to Excel for manual analysis.
-
-### **Project 2: Business Intelligence KPI Dashboard**
-- **Workflow**:
-  1. Use SSIS to ingest sales data.
-  2. Transform into FactSales and dimension tables (DimProducts, DimRegions).
-  3. Develop SQL views for KPIs (revenue, productivity).
-  4. Build Power BI dashboards for performance metrics.
-
-### **Project 3: Integration with Real-Time System**
-- **Workflow**:
-  1. Extract non-fraudulent data from Delta Lake in the real-time system.
-  2. Archive clean data in SQL Server using ETL workflows.
-  3. Retain only relevant historical data in Delta Lake for optimized performance.
-  4. Visualize unified reports combining real-time and batch data in Power BI.
+### **4. Real-Time Integration (Planned)**
+- **Data Extraction**: Periodically extract non-fraudulent claims data from the real-time system.
+- **Archival and Retention**:
+  - Archive clean claims data into the DWH for historical reporting.
+  - Retain flagged claims in the real-time system for analysis and machine learning retraining.
+- **Unified Reporting**: Generate comprehensive reports by combining batch and real-time data.
 
 ---
 
-## **Implementation Plan**
+## **How to Use**
 
-### **Step 1: Environment Setup**
-- Install required software:
-  - SQL Server Developer Edition with SSIS and SSDT.
-  - Power BI Desktop.
-  - Python with Pandas and SQLAlchemy.
-  - Excel with Power Query enabled.
-- Verify connections:
-  - Test SQL Server accessibility via SSMS.
-  - Ensure Python connects to SQL Server using SQLAlchemy.
+### **1. Prerequisites**
+- Set up the `NorthwellPracticeDWH` database by running `CreateDatabase.sql` and the scripts in `CreateTables/`.
+- Configure Python and SQL Server connections.
 
-### **Step 2: Data Warehouse Setup**
-1. **Schema Design:**
-   - Create star schema with:
-     - Fact Tables: FactClaims, FactSales, FactMonthlyRevenue, FactPreClaimEdits.
-     - Dimension Tables: DimPayers, DimClaimStatus, DimEmployees, DimProducts, DimRegions, DimDepartments.
-2. **Data Ingestion:**
-   - Use SSIS to load raw data into staging tables.
-   - Transform and load cleaned data into fact and dimension tables.
-   - Log each ETL process into the `ETL_Log` table.
-3. **Validation**:
-   - Run SQL queries to confirm data integrity.
-
-### **Step 3: Project-Specific Workflows**
-- Implement SQL views and stored procedures for reusable transformations.
-- Build Power BI dashboards and Excel reports for each project use case.
-
----
-
-## **Tools and Datasets**
-
-### **Software Requirements**
-- SQL Server Developer Edition (with SSIS).
-- Power BI Desktop.
-- Microsoft Excel with Power Query.
-- Python (Pandas, SQLAlchemy).
-
-### **Sample Datasets**
-- Claims and denial data (e.g., synthetic healthcare datasets).
-- Sales data (e.g., product, region, revenue details).
-- Employee productivity data (tasks, costs).
-- External benchmarks from Kaggle and data.gov.
-
----
-
-## **How to Run**
-1. Clone or download the repository containing the SQL scripts and workflows.
-2. Execute scripts in sequence:
-   - Start with `CreateDatabase.sql` (in `Shared/CommonScripts/`).
-   - Run table creation scripts in `CreateTables/`.
-   - Load data using `PopulateData/` scripts.
-3. Test queries and workflows in SSMS.
-4. Use Power BI and Excel to visualize and analyze data.
+### **2. Execution Steps**
+1. **Data Ingestion**:
+   - Use `LoadClaims.sql` or the `LoadClaims.dtsx` SSIS package to load raw data into staging tables.
+2. **Data Transformation**:
+   - Run `TransformToFactAndDim.sql` or the `TransformClaims.dtsx` SSIS package.
+3. **Data Logging**:
+   - Review `ETL_Log` and `ETL_FileTracking` for process statuses and file metadata.
+4. **Visualization**:
+   - Use Power BI to generate insights using `PowerBI.pbix`.
 
 ---
 
 ## **Future Enhancements**
-- Add Slowly Changing Dimensions (SCD) for historical tracking.
-- Implement pre-aggregated tables for frequently used metrics.
-- Migrate workflows to Azure for scalability.
-- Integrate incremental real-time data updates from Delta Lake for up-to-date reporting.
+- Implement incremental data loading for improved processing efficiency.
+- Automate email notifications for ETL success or failure alerts.
+- Integrate centralized monitoring solutions like Azure Monitor for enhanced tracking.
+- Develop machine learning pipelines for fraud detection and predictions.
 
 ---
-
-## **Contributing**
-Contributions are welcome! Please submit a pull request with details on changes or improvements.
-
----
-
-## **Contact**
-For questions or feedback, reach out to [dandredesir@gmail.com].
-
----
-
