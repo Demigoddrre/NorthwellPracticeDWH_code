@@ -1,7 +1,3 @@
-Here's the updated **NorthwellPracticeDWH** README with your requested additions and clarifications:  
-
----
-
 # **NorthwellPracticeDWH Project**  
 
 ## **Project Overview**  
