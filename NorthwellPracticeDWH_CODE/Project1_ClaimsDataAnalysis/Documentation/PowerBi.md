@@ -92,3 +92,70 @@ To create meaningful and actionable Power BI dashboards that address key busines
 - Enable better financial management and resource allocation.
 - Create a foundation for future real-time or hybrid analytics solutions.
 
+---
+
+### **Finding Additional Datasets for Enhanced Visualizations**
+
+To create more enriched and insightful visualizations, it’s essential to integrate additional datasets that complement your existing claims data. These datasets can add depth and context, enabling you to answer more complex business questions.
+
+#### **Potential Data Sources**
+1. **Kaggle**:
+   - Kaggle offers a wide variety of healthcare-related datasets, including claims data, provider demographics, patient statistics, and more.
+   - Visit: [Kaggle Healthcare Datasets](https://www.kaggle.com/)
+
+2. **Data.gov**:
+   - The U.S. government's open data platform provides access to publicly available healthcare data, including CMS claims, demographics, and operational statistics.
+   - Visit: [Data.gov Healthcare](https://www.data.gov/health/)
+
+3. **CMS (Centers for Medicare & Medicaid Services)**:
+   - Offers detailed claims and provider datasets for Medicare and Medicaid.
+   - Visit: [CMS Data](https://data.cms.gov/)
+
+4. **Mockaroo**:
+   - For generating synthetic but realistic data to simulate scenarios not covered in your current dataset.
+   - Visit: [Mockaroo](https://www.mockaroo.com/)
+
+5. **World Bank**:
+   - Provides global healthcare statistics, which can be useful for broader comparisons.
+   - Visit: [World Bank Data](https://databank.worldbank.org/)
+
+6. **Other Platforms**:
+   - **Google Dataset Search**: Search for open datasets across the web.
+   - **Statista**: For healthcare statistics and insights (some data may require a subscription).
+
+---
+
+### **Combining Datasets in Power BI Free Desktop Version**
+
+#### **Does Power BI Free Version Allow Dataset Integration?**
+Yes! Power BI Desktop (free version) allows you to combine multiple datasets, including CSV files, and create relationships between them for enriched data modeling.
+
+#### **How to Combine Datasets**
+1. **Import Multiple Datasets**:
+   - Use the **Get Data** option in Power BI to import multiple CSV files, Excel sheets, or other supported formats.
+2. **Model Relationships**:
+   - Navigate to the **Model View** to create relationships between tables. For example:
+     - Link `Claim ID` between Claims and Denial Codes datasets.
+     - Link `Provider ID` between Claims and Provider datasets.
+3. **Merge Queries** (Optional):
+   - Use **Power Query Editor** to merge datasets. This is useful when you want to combine datasets into a single table rather than linking them.
+   - Example: Merge a patient demographics dataset with claims data using `Patient ID` as the key.
+4. **Build Visuals**:
+   - Once relationships are set, you can use fields from multiple datasets in the same report.
+
+#### **Advantages of Combining Datasets**
+- **Deeper Insights**: For example, linking a Provider dataset with Claims data can give insights into provider-specific trends.
+- **Flexibility**: Allows answering broader questions that require data from different sources.
+- **Simplified Analysis**: Power BI handles the heavy lifting of combining and modeling data.
+
+#### **Limitations in Free Version**
+- While you can import, combine, and create relationships with datasets locally, sharing reports and collaborating online requires Power BI Pro or Premium.
+
+---
+
+### **Next Steps**
+1. Identify gaps in your current dataset for specific visualizations.
+2. Use the suggested platforms to find relevant datasets.
+3. Combine the datasets in Power BI to enrich your analysis.
+4. Document any new datasets and their structure for future reference.
+
