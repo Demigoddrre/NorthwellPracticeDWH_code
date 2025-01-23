@@ -19,3 +19,13 @@ CREATE TABLE dbo.ETL_FileTracking (
     RecordsProcessed INT,        -- Number of rows processed from the file
     ErrorMessage NVARCHAR(MAX)   -- Error details, if any
 );
+
+CREATE TABLE dbo.ETL_ErrorLog (
+    ErrorID INT IDENTITY(1,1) PRIMARY KEY,
+    ErrorDateTime DATETIME DEFAULT GETDATE(),
+    ProcessName NVARCHAR(255), -- e.g., 'LoadClaims'
+    TaskName NVARCHAR(255),    -- Task or transformation name
+    ColumnName NVARCHAR(255),  -- Column causing the error, if applicable
+    RowData NVARCHAR(MAX),     -- Snapshot of the problematic row data
+    ErrorMessage NVARCHAR(MAX) -- Detailed error message
+);
