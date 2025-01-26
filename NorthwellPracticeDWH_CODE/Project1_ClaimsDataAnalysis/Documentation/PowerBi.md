@@ -1,161 +1,76 @@
-# Data Visualization Plan and Questions for Power BI Dashboards
+### **Updated README for Power BI Project**
 
-## **Objective**
-To create meaningful and actionable Power BI dashboards that address key business questions and provide insights for executives, operations teams, and other stakeholders. This plan outlines the questions to answer, the datasets needed, and the rationale behind each visualization.
-
----
-
-## **Key Questions and Visualizations**
-
-### **1. Claims Overview**
-- **Question**: What is the overall distribution of claims by status (Approved, Denied, Pending)?
-- **Visualization**: Pie chart or bar chart.
-- **Why**: Provides a quick snapshot of claim processing efficiency and highlights areas requiring immediate attention.
-
-### **2. Revenue Tracking**
-- **Question**: What are the billed, allowed, and paid amounts for claims over time?
-- **Visualization**: Line chart or area chart.
-- **Why**: Tracks financial performance and identifies trends in payments and revenue streams.
-
-### **3. Provider Performance**
-- **Question**: Which providers are generating the most claims, and what is their approval rate?
-- **Visualization**: Bar chart with filters by provider.
-- **Why**: Identifies top-performing providers and those with high denial rates for targeted interventions.
-
-### **4. Denial Analysis**
-- **Question**: What are the top denial reasons, and how do they vary by provider or region?
-- **Visualization**: Stacked bar chart or heat map.
-- **Why**: Helps reduce denials by focusing on the most common issues and their sources.
-
-### **5. Geographic Trends**
-- **Question**: How are claims distributed across regions, and what are the approval/denial rates by state?
-- **Visualization**: Map visualization.
-- **Why**: Identifies regional variations to inform resource allocation and operational strategies.
-
-### **6. SLA Compliance**
-- **Question**: How many claims are resolved within SLA deadlines, and how many breach them?
-- **Visualization**: Gauge chart or stacked bar chart.
-- **Why**: Measures operational efficiency and compliance with service-level agreements.
-
-### **7. Claims Processing Time**
-- **Question**: What is the average time taken to process claims, and how does it vary by claim type or provider?
-- **Visualization**: Box plot or bar chart.
-- **Why**: Identifies bottlenecks and opportunities to streamline processes.
-
-### **8. Employee Productivity**
-- **Question**: How many claims are processed per employee, and what is the average resolution time?
-- **Visualization**: Bar chart with drill-down by employee.
-- **Why**: Tracks team performance and identifies training or resource needs.
-
-### **9. Financial Analysis**
-- **Question**: What is the outstanding amount for claims, and how does it vary by provider or region?
-- **Visualization**: Table or matrix.
-- **Why**: Provides granular insights into financial liabilities and cash flow management.
-
-### **10. Trend Analysis**
-- **Question**: How has claim volume and revenue changed over the past year?
-- **Visualization**: Line chart with trendlines.
-- **Why**: Identifies seasonal trends and growth opportunities.
+#### **Objective**
+Enhance the Power BI dashboards with additional insights into patient demographics, lifestyle factors, and their impact on claims and financial metrics using the new `insurance.csv` dataset.
 
 ---
 
-## **How to Approach the Visualizations**
+### **Additional Questions and Visualizations**
 
-### **Dataset Requirements**
-- **Claims Dataset (Expanded)**: Includes Claim ID, status, billed/allowed/paid amounts, denial reasons, and resolution times.
-- **Provider Dataset**: Includes provider name, specialty, and region.
-- **Patient Dataset**: Includes demographic information for claims trends by age, gender, and location.
-- **Denial Reason Codes**: Provides detailed insights into denial reasons.
-- **SLA Dataset**: Tracks SLA deadlines and compliance.
-- **Financial Dataset**: Includes detailed payment data for claims.
-- **Employee Productivity Dataset**: Tracks claims processed by team members.
+#### **1. Claims vs. Demographics**
+- **Question**: How do age, gender, and BMI influence claim amounts?
+- **Visualization**: Scatter plot or bubble chart with filters for age groups and BMI.
+- **Why**: Identifies correlations between demographic factors and claim values, providing insights for targeted interventions.
 
-### **Why These Questions and Visualizations Matter**
-- **Executives**: Gain high-level insights into revenue, performance, and operational efficiency.
-- **Operations Teams**: Identify bottlenecks, SLA breaches, and areas for process improvement.
-- **Financial Teams**: Track payments, outstanding amounts, and denial reasons for better financial planning.
+#### **2. Smoking Status Analysis**
+- **Question**: How do smoking habits affect the total charges and claim amounts?
+- **Visualization**: Bar chart or stacked column chart grouped by smoking status.
+- **Why**: Quantifies the financial impact of smoking on claims and total charges, useful for healthcare planning.
 
----
+#### **3. Regional Claims and Charges**
+- **Question**: How do total charges and claims vary by region?
+- **Visualization**: Map visualization or clustered bar chart.
+- **Why**: Highlights regional trends in charges and claims, aiding resource allocation and policy planning.
 
-## **Next Steps**
-1. **Prepare Datasets**: Generate or source additional datasets to fill gaps and enrich visualizations.
-2. **Create Relationships**: Define relationships between datasets in Power BI (e.g., Claim ID linking Claims and Denial Reasons).
-3. **Develop Dashboards**: Build interactive dashboards using the free version of Power BI.
-4. **Validate Visualizations**: Ensure the insights align with the business questions and are easy to interpret.
-5. **Iterate and Improve**: Gather feedback from stakeholders to refine and enhance dashboards.
+#### **4. Family Size Impact**
+- **Question**: How does the number of children affect claims and charges?
+- **Visualization**: Line chart or grouped bar chart (e.g., grouped by region or smoking status).
+- **Why**: Shows how family size impacts financial liabilities and claim patterns.
 
----
+#### **5. Financial and Lifestyle Trends**
+- **Question**: How do demographic and lifestyle factors (age, BMI, smoking) interact to affect charges and denials?
+- **Visualization**: Heatmap or correlation matrix.
+- **Why**: Uncovers complex relationships between demographics, lifestyle, and claims.
 
-## **Goals for Power BI Dashboards**
-- Provide actionable insights to stakeholders.
-- Improve operational efficiency through data-driven decisions.
-- Enable better financial management and resource allocation.
-- Create a foundation for future real-time or hybrid analytics solutions.
-
----
-
-### **Finding Additional Datasets for Enhanced Visualizations**
-
-To create more enriched and insightful visualizations, it’s essential to integrate additional datasets that complement your existing claims data. These datasets can add depth and context, enabling you to answer more complex business questions.
-
-#### **Potential Data Sources**
-1. **Kaggle**:
-   - Kaggle offers a wide variety of healthcare-related datasets, including claims data, provider demographics, patient statistics, and more.
-   - Visit: [Kaggle Healthcare Datasets](https://www.kaggle.com/)
-
-2. **Data.gov**:
-   - The U.S. government's open data platform provides access to publicly available healthcare data, including CMS claims, demographics, and operational statistics.
-   - Visit: [Data.gov Healthcare](https://www.data.gov/health/)
-
-3. **CMS (Centers for Medicare & Medicaid Services)**:
-   - Offers detailed claims and provider datasets for Medicare and Medicaid.
-   - Visit: [CMS Data](https://data.cms.gov/)
-
-4. **Mockaroo**:
-   - For generating synthetic but realistic data to simulate scenarios not covered in your current dataset.
-   - Visit: [Mockaroo](https://www.mockaroo.com/)
-
-5. **World Bank**:
-   - Provides global healthcare statistics, which can be useful for broader comparisons.
-   - Visit: [World Bank Data](https://databank.worldbank.org/)
-
-6. **Other Platforms**:
-   - **Google Dataset Search**: Search for open datasets across the web.
-   - **Statista**: For healthcare statistics and insights (some data may require a subscription).
+#### **6. Overall Demographic Summary**
+- **Question**: What are the overall distributions of age, gender, BMI, and smoking status among claimants?
+- **Visualization**: Pie chart or histogram for each attribute.
+- **Why**: Provides a summary of the demographic landscape for better understanding of the claimant population.
 
 ---
 
-### **Combining Datasets in Power BI Free Desktop Version**
+### **Updated Approach to Visualizations**
 
-#### **Does Power BI Free Version Allow Dataset Integration?**
-Yes! Power BI Desktop (free version) allows you to combine multiple datasets, including CSV files, and create relationships between them for enriched data modeling.
+#### **Combine Datasets**
+- Use **Claim ID** or **Patient ID** to create relationships between `claim_data.csv` and `insurance.csv`.
+- If no direct key exists, create a composite key (e.g., concatenating columns) or use `Power Query` to merge datasets.
 
-#### **How to Combine Datasets**
-1. **Import Multiple Datasets**:
-   - Use the **Get Data** option in Power BI to import multiple CSV files, Excel sheets, or other supported formats.
-2. **Model Relationships**:
-   - Navigate to the **Model View** to create relationships between tables. For example:
-     - Link `Claim ID` between Claims and Denial Codes datasets.
-     - Link `Provider ID` between Claims and Provider datasets.
-3. **Merge Queries** (Optional):
-   - Use **Power Query Editor** to merge datasets. This is useful when you want to combine datasets into a single table rather than linking them.
-   - Example: Merge a patient demographics dataset with claims data using `Patient ID` as the key.
-4. **Build Visuals**:
-   - Once relationships are set, you can use fields from multiple datasets in the same report.
+#### **Enhance Existing Questions**
+- **Claims Processing Time**: Add filters for `age`, `region`, and `smoking status` to analyze processing time across demographics.
+- **Denial Analysis**: Include smoking status and region to analyze denial reasons more granularly.
+- **Financial Analysis**: Extend the analysis to correlate financial metrics with lifestyle and demographic factors.
 
-#### **Advantages of Combining Datasets**
-- **Deeper Insights**: For example, linking a Provider dataset with Claims data can give insights into provider-specific trends.
-- **Flexibility**: Allows answering broader questions that require data from different sources.
-- **Simplified Analysis**: Power BI handles the heavy lifting of combining and modeling data.
-
-#### **Limitations in Free Version**
-- While you can import, combine, and create relationships with datasets locally, sharing reports and collaborating online requires Power BI Pro or Premium.
+#### **New Datasets Added**
+1. **Insurance Dataset**:
+   - Columns: `age`, `sex`, `bmi`, `children`, `smoker`, `region`, `charges`.
+   - Purpose: Enrich claims data with demographic and lifestyle insights for better analysis.
 
 ---
 
 ### **Next Steps**
-1. Identify gaps in your current dataset for specific visualizations.
-2. Use the suggested platforms to find relevant datasets.
-3. Combine the datasets in Power BI to enrich your analysis.
-4. Document any new datasets and their structure for future reference.
+1. **Data Integration**:
+   - Load `insurance.csv` into Power BI.
+   - Create relationships between `insurance.csv` and `claim_data.csv` (if possible).
+   - Use Power Query to clean and transform data (if needed).
+   
+2. **Develop New Visualizations**:
+   - Create charts based on the new questions above.
+   - Update existing dashboards to incorporate new filters (e.g., smoking status, region, age).
 
+3. **Validate Insights**:
+   - Cross-check new visualizations against raw data to ensure accuracy.
+   - Gather stakeholder feedback to refine the updated dashboards.
+
+4. **Iterate and Improve**:
+   - Combine insights from the two datasets to uncover deeper trends.
+   - Explore additional datasets (if needed) to enhance analyses further.
