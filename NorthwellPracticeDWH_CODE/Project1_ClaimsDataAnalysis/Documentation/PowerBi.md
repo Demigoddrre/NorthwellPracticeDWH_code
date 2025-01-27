@@ -74,3 +74,122 @@ Enhance the Power BI dashboards with additional insights into patient demographi
 4. **Iterate and Improve**:
    - Combine insights from the two datasets to uncover deeper trends.
    - Explore additional datasets (if needed) to enhance analyses further.
+
+### **Implementation Plan for "Claims vs. Demographics" Visualization**
+
+To answer the question **"How do age, gender, and BMI influence claim amounts?"**, follow this step-by-step implementation plan in Power BI:
+
+---
+
+### **Step 1: Establish Relationships Between Datasets**
+
+#### **1. Identify Common Keys:**
+- Examine both datasets (`claim_data.csv` and `insurance.csv`) for common fields to create relationships.
+- If there is no direct key, consider creating a composite key:
+  - For example: Combine `Patient ID` in `claim_data.csv` and demographic attributes (e.g., `age`, `sex`) from `insurance.csv`.
+
+#### **2. Create Relationships in Power BI:**
+- Navigate to the **Model View** in Power BI.
+- Drag and drop to link tables:
+  - If a direct key exists (e.g., `Patient ID`), link it between the datasets.
+  - If no direct key exists:
+    - Use **Power Query** to merge datasets based on shared attributes (e.g., `age`, `sex`, `region`).
+    - Alternatively, add a composite key in Power Query:
+      ```powerquery
+      CompositeKey = Table.AddColumn(
+          Source,
+          "CompositeKey",
+          each [Patient ID] & Text.From([age]) & [sex],
+          type text
+      )
+      ```
+    - Use the composite key to create the relationship.
+
+#### **3. Validate Relationships:**
+- Ensure relationships are set to **One-to-Many** or **Many-to-Many** as needed.
+- Confirm proper data cardinality:
+  - Example: `insurance.csv` (Demographics) is a **dimension** table, while `claim_data.csv` (Claims) is a **fact** table.
+
+---
+
+### **Step 2: Create a New Calculated Column**
+
+#### **1. Add Age Groups:**
+- In **Power Query** or the Data View, create a calculated column for age groups:
+  ```DAX
+  AgeGroup = 
+  SWITCH(
+      TRUE(),
+      [age] <= 18, "0-18",
+      [age] <= 35, "19-35",
+      [age] <= 50, "36-50",
+      [age] <= 65, "51-65",
+      "65+"
+  )
+  ```
+
+#### **2. Ensure Fields Are Ready:**
+- Check that fields such as `age`, `sex`, `bmi`, and `charges` are correctly loaded and formatted:
+  - `age`: Numeric.
+  - `sex`: Categorical.
+  - `bmi`: Numeric.
+  - `charges`: Numeric.
+
+---
+
+### **Step 3: Build the Scatter Plot or Bubble Chart**
+
+#### **1. Add the Visualization:**
+- Open the **Report View** in Power BI.
+- Insert a **Scatter Plot** or **Bubble Chart** from the Visualizations Pane.
+
+#### **2. Configure the Chart:**
+- **X-Axis**: Use `age` or `BMI`.
+- **Y-Axis**: Use `charges` (Claim Amounts).
+- **Size**: Use `charges` (optional for bubble chart size).
+- **Color**: Use `sex` for color coding (e.g., male vs. female).
+- **Tooltip**: Add details like `Patient ID`, `region`, and `smoker` for better context.
+
+#### **3. Add Filters:**
+- Use slicers to filter the data dynamically:
+  - Add a slicer for `AgeGroup` to group by age.
+  - Add a slicer for `BMI` to narrow results.
+
+---
+
+### **Step 4: Analyze and Validate Insights**
+
+#### **1. Ensure Data Quality:**
+- Check for null or inconsistent values in critical fields (`charges`, `bmi`, `age`, `sex`).
+- Remove outliers or anomalies if necessary:
+  - Example: Extremely high BMI or charges may skew the results.
+
+#### **2. Validate Insights:**
+- Compare trends in the scatter plot against expectations (e.g., higher BMI leading to higher charges).
+
+#### **3. Add Context:**
+- Add descriptive titles and labels to clarify:
+  - Example: "Impact of Age, Gender, and BMI on Claim Amounts."
+
+---
+
+### **Step 5: Iterate and Refine**
+
+#### **1. Test Filters:**
+- Verify that slicers (e.g., AgeGroup, BMI) adjust the visualization correctly.
+
+#### **2. Add Drill-Throughs (Optional):**
+- Enable drill-through to patient-level details by linking to a detailed table report.
+
+#### **3. Stakeholder Feedback:**
+- Share the visualization with stakeholders and refine based on their feedback.
+
+---
+
+### **Outcome**
+
+This visualization will allow users to:
+- Identify trends between demographic factors and claim amounts.
+- Filter and analyze specific segments (e.g., by gender, age group, or BMI).
+- Gain actionable insights for targeted healthcare interventions.
+
